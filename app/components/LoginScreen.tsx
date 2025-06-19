@@ -1,9 +1,17 @@
-import { borderRadius, colors, spacing, typography } from '@/constants/theme';
-import { api } from '@/convex/_generated/api';
-import { Ionicons } from '@expo/vector-icons';
-import { useMutation } from 'convex/react';
-import { useState } from 'react';
-import { StyleSheet, Text, TextInput, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { borderRadius, colors, spacing, typography } from "@/constants/theme";
+import { api } from "@/convex/_generated/api";
+import { Ionicons } from "@expo/vector-icons";
+import { useMutation } from "convex/react";
+import { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 
 interface LoginScreenProps {
   onLogin: (user: any) => void;
@@ -27,13 +35,18 @@ export function LoginScreen({ onLogin }: LoginScreenProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Ionicons 
-          name="business" 
-          size={48} 
-          color={colors.primary} 
-          style={{ marginBottom: spacing.md }} 
+        <Ionicons
+          name="business"
+          size={48}
+          color={colors.primary}
+          style={{ marginBottom: spacing.md }}
         />
-        <Text style={styles.titleText}>WorkSync</Text>
+        <Text
+          className="text-xl font-bold text-blue-500"
+          // style={styles.titleText}
+        >
+          WorkSync
+        </Text>
         <Text style={styles.subtitleText}>Войдите в свой аккаунт</Text>
       </View>
 
@@ -61,18 +74,14 @@ export function LoginScreen({ onLogin }: LoginScreenProps) {
           />
         </View>
 
-        {error ? (
-          <Text style={styles.errorText}>{error}</Text>
-        ) : null}
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
         <TouchableOpacity
           onPress={handleSubmit}
           style={styles.button}
           activeOpacity={0.8}
         >
-          <Text style={styles.buttonText}>
-            Войти
-          </Text>
+          <Text style={styles.buttonText}>Войти</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -91,17 +100,17 @@ type Styles = {
   labelText: TextStyle;
   errorText: TextStyle;
   buttonText: TextStyle;
-}
+};
 
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: spacing.xl,
     backgroundColor: colors.background,
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: spacing.xxl,
   },
   form: {
@@ -144,13 +153,13 @@ const styles = StyleSheet.create<Styles>({
   errorText: {
     fontSize: typography.sizes.sm,
     color: colors.error,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: spacing.md,
   },
   buttonText: {
     fontSize: typography.sizes.base,
     fontWeight: typography.weights.semibold,
     color: colors.text.primary,
-    textAlign: 'center',
+    textAlign: "center",
   },
-}); 
+});

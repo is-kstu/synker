@@ -1,15 +1,24 @@
-import { colors, spacing, typography } from '@/constants/theme';
-import { api } from '@/convex/_generated/api';
-import { Ionicons } from '@expo/vector-icons';
-import { useQuery } from 'convex/react';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import React, { useCallback, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { AddShiftScreen } from './components/AddShiftScreen';
-import { GeneralScheduleScreen } from './components/GeneralScheduleScreen';
-import { LoginScreen } from './components/LoginScreen';
-import { MyScheduleScreen } from './components/MyScheduleScreen';
+import { colors, spacing, typography } from "@/constants/theme";
+import { api } from "@/convex/_generated/api";
+import { Ionicons } from "@expo/vector-icons";
+import { useQuery } from "convex/react";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import React, { useCallback, useState } from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
+import { AddShiftScreen } from "./components/AddShiftScreen";
+import { GeneralScheduleScreen } from "./components/GeneralScheduleScreen";
+import { LoginScreen } from "./components/LoginScreen";
+import { MyScheduleScreen } from "./components/MyScheduleScreen";
+import "./global.css";
 
 type AppView = "login" | "generalSchedule" | "mySchedule" | "addShift";
 
@@ -26,8 +35,8 @@ const DAYS = [
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>("login");
   const [loggedInUser, setLoggedInUser] = useState<any | null>(null);
-  
-  const dailySchedules = DAYS.map(day => {
+
+  const dailySchedules = DAYS.map((day) => {
     const shifts = useQuery(api.shifts.getShiftsByDay, { day }) || [];
     return {
       day,
@@ -51,18 +60,13 @@ export default function App() {
         return <LoginScreen onLogin={handleLogin} />;
       case "generalSchedule":
         if (!loggedInUser) return <UnauthorizedScreen />;
-        return (
-          <GeneralScheduleScreen
-            dailySchedules={dailySchedules}
-            currentUserRole={loggedInUser.role}
-          />
-        );
+        return <GeneralScheduleScreen currentUserRole={loggedInUser.role} />;
       case "mySchedule":
         if (!loggedInUser) return <UnauthorizedScreen />;
         return <MyScheduleScreen currentUser={loggedInUser} />;
       case "addShift":
         if (loggedInUser?.role !== "manager") return <UnauthorizedScreen />;
-        return <AddShiftScreen dailySchedules={DAYS.map(day => ({ day, shifts: [] }))} />;
+        return <AddShiftScreen />;
       default:
         return <LoginScreen onLogin={handleLogin} />;
     }
@@ -76,7 +80,7 @@ export default function App() {
           headerShown: false,
         }}
       />
-      
+
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
@@ -91,15 +95,16 @@ export default function App() {
             style={styles.logoutButton}
             activeOpacity={0.7}
           >
-            <Ionicons name="log-out-outline" size={24} color={colors.text.secondary} />
+            <Ionicons
+              name="log-out-outline"
+              size={24}
+              color={colors.text.secondary}
+            />
           </TouchableOpacity>
         )}
       </View>
-
       {/* Main Content */}
-      <View style={styles.content}>
-        {renderView()}
-      </View>
+      <View style={styles.content}>{renderView()}</View>
 
       {/* Navigation Bar */}
       {loggedInUser && (
@@ -142,7 +147,12 @@ export default function App() {
   );
 }
 
-function NavButton({ icon, label, isActive, onPress }: {
+function NavButton({
+  icon,
+  label,
+  isActive,
+  onPress,
+}: {
   icon: keyof typeof Ionicons.glyphMap;
   label: string;
   isActive: boolean;
@@ -161,7 +171,9 @@ function NavButton({ icon, label, isActive, onPress }: {
           color={isActive ? colors.primary : colors.text.secondary}
         />
       </View>
-      <Text style={[styles.navLabelText, isActive && styles.navLabelActiveText]}>
+      <Text
+        style={[styles.navLabelText, isActive && styles.navLabelActiveText]}
+      >
         {label}
       </Text>
     </TouchableOpacity>
@@ -172,14 +184,12 @@ function UnauthorizedScreen() {
   return (
     <View style={styles.unauthorized}>
       <View style={styles.unauthorizedIcon}>
-        <Ionicons 
-          name="shield-outline" 
-          size={64} 
-          color={colors.error} 
-        />
+        <Ionicons name="shield-outline" size={64} color={colors.error} />
       </View>
       <Text style={styles.unauthorizedTitleText}>Доступ запрещен</Text>
-      <Text style={styles.unauthorizedDescText}>У вас нет необходимых прав для этого раздела.</Text>
+      <Text style={styles.unauthorizedDescText}>
+        У вас нет необходимых прав для этого раздела.
+      </Text>
     </View>
   );
 }
@@ -203,7 +213,7 @@ type Styles = {
   unauthorizedIcon: ViewStyle;
   unauthorizedTitleText: TextStyle;
   unauthorizedDescText: TextStyle;
-}
+};
 
 const styles = StyleSheet.create<Styles>({
   container: {
@@ -214,15 +224,15 @@ const styles = StyleSheet.create<Styles>({
     backgroundColor: colors.background,
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.md,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
   headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   headerIcon: {
     marginRight: spacing.sm,
@@ -248,12 +258,12 @@ const styles = StyleSheet.create<Styles>({
     paddingVertical: spacing.sm,
   },
   navbarContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   navButton: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: spacing.sm,
     marginHorizontal: spacing.sm,
     borderRadius: spacing.xl,
@@ -275,8 +285,8 @@ const styles = StyleSheet.create<Styles>({
   },
   unauthorized: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     padding: spacing.xl,
   },
   unauthorizedIcon: {
@@ -291,6 +301,6 @@ const styles = StyleSheet.create<Styles>({
   },
   unauthorizedDescText: {
     color: colors.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
   },
-}); 
+});

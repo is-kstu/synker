@@ -1,9 +1,9 @@
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "convex/react";
-import { Image } from 'expo-image';
-import { ScrollView, Text, View } from 'react-native';
+import { Image } from "expo-image";
+import { ScrollView, Text, View } from "react-native";
 
 interface MyScheduleScreenProps {
   currentUser: {
@@ -14,8 +14,8 @@ interface MyScheduleScreenProps {
 }
 
 export function MyScheduleScreen({ currentUser }: MyScheduleScreenProps) {
-  const shifts = useQuery(api.shifts.getShiftsByEmployee, { 
-    employeeId: currentUser.id 
+  const shifts = useQuery(api.shifts.getShiftsByEmployee, {
+    employeeId: currentUser.id,
   });
 
   return (
@@ -33,9 +33,7 @@ export function MyScheduleScreen({ currentUser }: MyScheduleScreenProps) {
             <Text className="text-2xl font-bold text-slate-100">
               Мой график
             </Text>
-            <Text className="text-slate-400">
-              {currentUser.name}
-            </Text>
+            <Text className="text-slate-400">{currentUser.name}</Text>
           </View>
         </View>
       </View>
@@ -43,9 +41,7 @@ export function MyScheduleScreen({ currentUser }: MyScheduleScreenProps) {
       <View className="px-3">
         {!shifts ? (
           <View className="bg-zinc-800 rounded-lg py-10 px-4">
-            <Text className="text-slate-400 text-center">
-              Загрузка...
-            </Text>
+            <Text className="text-slate-400 text-center">Загрузка...</Text>
           </View>
         ) : shifts.length === 0 ? (
           <View className="bg-zinc-800 rounded-lg py-10 px-4">
@@ -63,9 +59,7 @@ export function MyScheduleScreen({ currentUser }: MyScheduleScreenProps) {
                 <Text className="text-base font-semibold text-slate-100">
                   {shift.task}
                 </Text>
-                <Text className="text-sm text-slate-400 mt-1">
-                  {shift.day}
-                </Text>
+                <Text className="text-sm text-slate-400 mt-1">{shift.day}</Text>
                 <View className="flex-row items-center mt-2">
                   <Ionicons name="time-outline" size={16} color="#60a5fa" />
                   <Text className="text-sm text-blue-400 ml-2 font-medium">
@@ -79,4 +73,4 @@ export function MyScheduleScreen({ currentUser }: MyScheduleScreenProps) {
       </View>
     </ScrollView>
   );
-} 
+}
