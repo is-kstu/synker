@@ -1,21 +1,26 @@
 import { api } from '@/convex/_generated/api';
 import { Id } from '@/convex/_generated/dataModel';
-import type { DailySchedule } from '@/lib/mock-data';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import { useMutation, useQuery } from 'convex/react';
 import { useState } from 'react';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-interface AddShiftScreenProps {
-  dailySchedules: DailySchedule[];
-}
+const days = [
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
+  "Воскресенье"
+];
 
-export function AddShiftScreen({ dailySchedules }: AddShiftScreenProps) {
+export function AddShiftScreen() {
   const employees = useQuery(api.users.getUsers, { role: "employee" }) || [];
   const createShift = useMutation(api.shifts.createShift);
   const [employeeId, setEmployeeId] = useState<Id<"users"> | "">("");
-  const [day, setDay] = useState(dailySchedules[0]?.day || "");
+  const [day, setDay] = useState(days[0]);
   const [startTime, setStartTime] = useState("09:00");
   const [endTime, setEndTime] = useState("17:00");
   const [task, setTask] = useState("");
@@ -53,7 +58,7 @@ export function AddShiftScreen({ dailySchedules }: AddShiftScreenProps) {
       
       // Clear form
       setEmployeeId("");
-      setDay(dailySchedules[0]?.day || "");
+      setDay(days[0]);
       setStartTime("09:00");
       setEndTime("17:00");
       setTask("");
@@ -108,11 +113,11 @@ export function AddShiftScreen({ dailySchedules }: AddShiftScreenProps) {
               style={{ color: '#f1f5f9' }}
             >
               <Picker.Item label="Выберите день" value="" />
-              {dailySchedules.map(schedule => (
+              {days.map(d => (
                 <Picker.Item
-                  key={schedule.day}
-                  label={schedule.day}
-                  value={schedule.day}
+                  key={d}
+                  label={d}
+                  value={d}
                 />
               ))}
             </Picker>

@@ -1,5 +1,5 @@
 import { api } from '@/convex/_generated/api';
-import type { DailySchedule, Employee } from '@/lib/mock-data';
+import { Id } from '@/convex/_generated/dataModel';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useQuery } from 'convex/react';
 import { ScrollView, Text, View } from 'react-native';
@@ -8,8 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const Tab = createMaterialTopTabNavigator();
 
 interface GeneralScheduleScreenProps {
-  dailySchedules: DailySchedule[];
-  currentUserRole: Employee['role'];
+  currentUserRole: 'manager' | 'employee';
 }
 
 const dayNameToShort: Record<string, string> = {
@@ -22,24 +21,25 @@ const dayNameToShort: Record<string, string> = {
   "Воскресенье": "Вс",
 };
 
-function DaySchedule({ schedule, currentUserRole }: {
-  schedule: DailySchedule;
-  currentUserRole: Employee['role'];
+function DaySchedule({ day, currentUserRole }: {
+  day: string;
+  currentUserRole: 'manager' | 'employee';
 }) {
+  const shifts = useQuery(api.shifts.getShiftsByDay, { day }) || [];
   const employees = useQuery(api.users.getUsers, {}) || [];
 
-  const getEmployeeById = (employeeId: string) => {
+  const getEmployeeById = (employeeId: Id<"users">) => {
     return employees.find(employee => employee.id === employeeId);
   };
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#18181b' }}>
-      {schedule.shifts.map((shift, index) => {
+      {shifts.map((shift) => {
         const employee = getEmployeeById(shift.employeeId);
         if (!employee) return null;
         
         return (
-          <View key={index} style={{
+          <View key={shift.id} style={{
             padding: 16,
             borderBottomWidth: 1,
             borderBottomColor: '#27272a',
@@ -57,7 +57,17 @@ function DaySchedule({ schedule, currentUserRole }: {
   );
 }
 
-export function GeneralScheduleScreen({ dailySchedules, currentUserRole }: GeneralScheduleScreenProps) {
+export function GeneralScheduleScreen({ currentUserRole }: GeneralScheduleScreenProps) {
+  const days = [
+    "Понедельник",
+    "Вторник",
+    "Среда",
+    "Четверг",
+    "Пятница",
+    "Суббота",
+    "Воскресенье"
+  ];
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#18181b' }} edges={['bottom']}>
       <Tab.Navigator
@@ -71,18 +81,18 @@ export function GeneralScheduleScreen({ dailySchedules, currentUserRole }: Gener
           tabBarScrollEnabled: true,
         }}
       >
-        {dailySchedules.map((schedule) => (
+        {days.map((day) => (
           <Tab.Screen
-            key={schedule.day}
-            name={schedule.day}
+            key={day}
+            name={day}
             options={{ 
-              title: dayNameToShort[schedule.day],
-              tabBarLabel: dayNameToShort[schedule.day]
+              title: dayNameToShort[day],
+              tabBarLabel: dayNameToShort[day]
             }}
           >
             {() => (
               <DaySchedule
-                schedule={schedule}
+                day={day}
                 currentUserRole={currentUserRole}
               />
             )}
