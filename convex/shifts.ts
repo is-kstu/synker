@@ -227,11 +227,9 @@ export const updateShift = mutation({
   },
 });
 
-// Helper to get the start of a given day in milliseconds
-const getDayStartMs = (date: Date) => {
-  const start = new Date(date);
-  start.setHours(0, 0, 0, 0);
-  return start.getTime();
+// Helper to get the start of a given day in YYYY-MM-DD format
+const getDayString = (date: Date) => {
+  return date.toISOString().split('T')[0];
 };
 
 export const getShiftsForWeek = query({
@@ -244,14 +242,17 @@ export const getShiftsForWeek = query({
     const endOfWeek = new Date(startOfWeek);
     endOfWeek.setDate(endOfWeek.getDate() + 7);
 
-    // We assume the 'day' field in your schema stores the timestamp
-    // for the beginning of the day of the shift.
+    // Convert dates to YYYY-MM-DD strings to match the schema
+    const startDateString = getDayString(startOfWeek);
+    const endDateString = getDayString(endOfWeek);
+
+    // Query shifts within the date range using string comparison
     const shiftsInWeek = await ctx.db
       .query("shifts")
       .withIndex("by_day", (q) =>
         q
-          .gte("day", getDayStartMs(startOfWeek))
-          .lt("day", getDayStartMs(endOfWeek))
+          .gte("day", startDateString)
+          .lt("day", endDateString)
       )
       .collect();
 
@@ -269,5 +270,26 @@ export const getShiftsForWeek = query({
     );
 
     return shiftsWithEmployees;
+  },
+});
+
+// Migration to remove shifts with incorrect date format
+export const migrateDateFormats = mutation({
+  args: {},
+  handler: async (ctx) => {
+    // Get all shifts
+    const allShifts = await ctx.db.query("shifts").collect();
+    
+    let deletedCount = 0;
+    
+    for (const shift of allShifts) {
+      // Check if the date format is dd.mm.yyyy (contains dots)
+      if (shift.day.includes('.')) {
+        await ctx.db.delete(shift._id);
+        deletedCount++;
+      }
+    }
+    
+    return `Migration completed. Deleted ${deletedCount} shifts with incorrect date format.`;
   },
 });

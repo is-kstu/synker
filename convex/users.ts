@@ -195,23 +195,23 @@ export const initializeMockData = mutation({
 
     // Create manager
     const managerId = await ctx.db.insert("users", {
-      name: "John Manager",
-      username: "manager",
+      name: "Иван Менеджер",
+      username: "менеджер",
       password: "password123",
       role: "manager",
     });
 
     // Create employees
     const employee1Id = await ctx.db.insert("users", {
-      name: "Alice Employee",
-      username: "alice",
+      name: "Алиса Сотрудник",
+      username: "алиса",
       password: "password123",
       role: "employee",
     });
 
     const employee2Id = await ctx.db.insert("users", {
-      name: "Bob Employee",
-      username: "bob",
+      name: "Борис Сотрудник",
+      username: "борис",
       password: "password123",
       role: "employee",
     });
@@ -226,7 +226,7 @@ export const initializeMockData = mutation({
       day: today.toISOString().split('T')[0],
       startTime: "09:00",
       endTime: "17:00",
-      task: "Customer support",
+      task: "Поддержка клиентов",
     });
 
     await ctx.db.insert("shifts", {
@@ -234,7 +234,7 @@ export const initializeMockData = mutation({
       day: tomorrow.toISOString().split('T')[0],
       startTime: "10:00",
       endTime: "18:00",
-      task: "Data entry",
+      task: "Ввод данных",
     });
 
     return "Mock data initialized successfully";

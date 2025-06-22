@@ -1,11 +1,7 @@
 // convex/api.ts
-import { createApi } from "convex/server";
-import { getShiftsForWeek } from "./shifts";
 
-export const api = createApi({
-  queries: {
-    getShiftsForWeek,
-    // ...other queries
-  },
-  // ...mutations
-});
+// Export the API from the generated file
+export { api } from "./_generated/api";
+
+// Export individual functions for convenience
+export { getShiftsForWeek } from "./shifts";

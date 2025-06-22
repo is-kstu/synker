@@ -34,6 +34,14 @@
     "scheme": "worksync",
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8f9ada98-f606-4211-aaed-760f233eb2dd"
+      }
     }
   }
 }
