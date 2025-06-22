@@ -1,10 +1,10 @@
-import { colors, spacing, typography } from '@/constants/theme'
-import { api } from '@/convex/_generated/api'
-import { Ionicons } from '@expo/vector-icons'
-import { useQuery } from 'convex/react'
-import { Stack } from 'expo-router'
-import { StatusBar } from 'expo-status-bar'
-import React, { useCallback, useState } from 'react'
+import { colors, spacing, typography } from "@/constants/theme";
+import { api } from "@/convex/_generated/api";
+import { Ionicons } from "@expo/vector-icons";
+import { useQuery } from "convex/react";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import React, { useCallback, useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,76 +13,76 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from 'react-native'
-import { AddShiftScreen } from './components/AddShiftScreen'
-import { GeneralScheduleScreen } from './components/GeneralScheduleScreen'
-import { LoginScreen } from './components/LoginScreen'
-import { MyScheduleScreen } from './components/MyScheduleScreen'
+} from "react-native";
+import { AddShiftScreen } from "./components/AddShiftScreen";
+import GeneralScheduleScreen from "./components/GeneralScheduleScreen";
+import { LoginScreen } from "./components/LoginScreen";
+import { MyScheduleScreen } from "./components/MyScheduleScreen";
 
-type AppView = 'login' | 'generalSchedule' | 'mySchedule' | 'addShift'
+type AppView = "login" | "generalSchedule" | "mySchedule" | "addShift";
 
 const DAYS = [
-  'Понедельник',
-  'Вторник',
-  'Среда',
-  'Четверг',
-  'Пятница',
-  'Суббота',
-  'Воскресенье',
-]
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
+  "Воскресенье",
+];
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<AppView>('login')
-  const [loggedInUser, setLoggedInUser] = useState<any | null>(null)
+  const [currentView, setCurrentView] = useState<AppView>("login");
+  const [loggedInUser, setLoggedInUser] = useState<any | null>(null);
 
-  const dailySchedules = DAYS.map(day => {
-    const shifts = useQuery(api.shifts.getShiftsByDay, { day }) || []
+  const dailySchedules = DAYS.map((day) => {
+    const shifts = useQuery(api.shifts.getShiftsByDay, { day }) || [];
     return {
       day,
       shifts,
-    }
-  })
+    };
+  });
 
   const handleLogin = useCallback((user: any) => {
-    setLoggedInUser(user)
-    setCurrentView(user.role === 'manager' ? 'generalSchedule' : 'mySchedule')
-  }, [])
+    setLoggedInUser(user);
+    setCurrentView(user.role === "manager" ? "generalSchedule" : "mySchedule");
+  }, []);
 
   const handleLogout = useCallback(() => {
-    setLoggedInUser(null)
-    setCurrentView('login')
-  }, [])
+    setLoggedInUser(null);
+    setCurrentView("login");
+  }, []);
 
   const renderView = () => {
     switch (currentView) {
-      case 'login':
-        return <LoginScreen onLogin={handleLogin} />
-      case 'generalSchedule':
-        if (!loggedInUser) return <UnauthorizedScreen />
+      case "login":
+        return <LoginScreen onLogin={handleLogin} />;
+      case "generalSchedule":
+        if (!loggedInUser) return <UnauthorizedScreen />;
         return (
           <GeneralScheduleScreen
             dailySchedules={dailySchedules}
             currentUserRole={loggedInUser.role}
           />
-        )
-      case 'mySchedule':
-        if (!loggedInUser) return <UnauthorizedScreen />
-        return <MyScheduleScreen currentUser={loggedInUser} />
-      case 'addShift':
-        if (loggedInUser?.role !== 'manager') return <UnauthorizedScreen />
+        );
+      case "mySchedule":
+        if (!loggedInUser) return <UnauthorizedScreen />;
+        return <MyScheduleScreen currentUser={loggedInUser} />;
+      case "addShift":
+        if (loggedInUser?.role !== "manager") return <UnauthorizedScreen />;
         return (
           <AddShiftScreen
-            dailySchedules={DAYS.map(day => ({ day, shifts: [] }))}
+            dailySchedules={DAYS.map((day) => ({ day, shifts: [] }))}
           />
-        )
+        );
       default:
-        return <LoginScreen onLogin={handleLogin} />
+        return <LoginScreen onLogin={handleLogin} />;
     }
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style='light' />
+      <StatusBar style="light" />
       <Stack.Screen
         options={{
           headerShown: false,
@@ -93,7 +93,7 @@ export default function App() {
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <View style={styles.headerIcon}>
-            <Ionicons name='business' size={24} color={colors.primary} />
+            <Ionicons name="business" size={24} color={colors.primary} />
           </View>
           <Text style={styles.headerTitleText}>WorkSync</Text>
         </View>
@@ -104,7 +104,7 @@ export default function App() {
             activeOpacity={0.7}
           >
             <Ionicons
-              name='log-out-outline'
+              name="log-out-outline"
               size={24}
               color={colors.text.secondary}
             />
@@ -119,41 +119,41 @@ export default function App() {
       {loggedInUser && (
         <View style={styles.navbar}>
           <View style={styles.navbarContent}>
-            {loggedInUser.role === 'manager' && (
+            {loggedInUser.role === "manager" && (
               <>
                 <NavButton
-                  icon='people'
-                  label='Команда'
-                  isActive={currentView === 'generalSchedule'}
-                  onPress={() => setCurrentView('generalSchedule')}
+                  icon="people"
+                  label="Команда"
+                  isActive={currentView === "generalSchedule"}
+                  onPress={() => setCurrentView("generalSchedule")}
                 />
                 <NavButton
-                  icon='add-circle'
-                  label='Добавить'
-                  isActive={currentView === 'addShift'}
-                  onPress={() => setCurrentView('addShift')}
+                  icon="add-circle"
+                  label="Добавить"
+                  isActive={currentView === "addShift"}
+                  onPress={() => setCurrentView("addShift")}
                 />
               </>
             )}
             <NavButton
-              icon='person'
-              label='Мой график'
-              isActive={currentView === 'mySchedule'}
-              onPress={() => setCurrentView('mySchedule')}
+              icon="person"
+              label="Мой график"
+              isActive={currentView === "mySchedule"}
+              onPress={() => setCurrentView("mySchedule")}
             />
-            {loggedInUser.role === 'employee' && (
+            {loggedInUser.role === "employee" && (
               <NavButton
-                icon='people'
-                label='Команда'
-                isActive={currentView === 'generalSchedule'}
-                onPress={() => setCurrentView('generalSchedule')}
+                icon="people"
+                label="Команда"
+                isActive={currentView === "generalSchedule"}
+                onPress={() => setCurrentView("generalSchedule")}
               />
             )}
           </View>
         </View>
       )}
     </SafeAreaView>
-  )
+  );
 }
 
 function NavButton({
@@ -162,10 +162,10 @@ function NavButton({
   isActive,
   onPress,
 }: {
-  icon: keyof typeof Ionicons.glyphMap
-  label: string
-  isActive: boolean
-  onPress: () => void
+  icon: keyof typeof Ionicons.glyphMap;
+  label: string;
+  isActive: boolean;
+  onPress: () => void;
 }) {
   return (
     <TouchableOpacity
@@ -186,43 +186,43 @@ function NavButton({
         {label}
       </Text>
     </TouchableOpacity>
-  )
+  );
 }
 
 function UnauthorizedScreen() {
   return (
     <View style={styles.unauthorized}>
       <View style={styles.unauthorizedIcon}>
-        <Ionicons name='shield-outline' size={64} color={colors.error} />
+        <Ionicons name="shield-outline" size={64} color={colors.error} />
       </View>
       <Text style={styles.unauthorizedTitleText}>Доступ запрещен</Text>
       <Text style={styles.unauthorizedDescText}>
         У вас нет необходимых прав для этого раздела.
       </Text>
     </View>
-  )
+  );
 }
 
 type Styles = {
-  container: ViewStyle
-  header: ViewStyle
-  headerLeft: ViewStyle
-  headerIcon: ViewStyle
-  headerTitleText: TextStyle
-  logoutButton: ViewStyle
-  content: ViewStyle
-  navbar: ViewStyle
-  navbarContent: ViewStyle
-  navButton: ViewStyle
-  navButtonActive: ViewStyle
-  navIcon: ViewStyle
-  navLabelText: TextStyle
-  navLabelActiveText: TextStyle
-  unauthorized: ViewStyle
-  unauthorizedIcon: ViewStyle
-  unauthorizedTitleText: TextStyle
-  unauthorizedDescText: TextStyle
-}
+  container: ViewStyle;
+  header: ViewStyle;
+  headerLeft: ViewStyle;
+  headerIcon: ViewStyle;
+  headerTitleText: TextStyle;
+  logoutButton: ViewStyle;
+  content: ViewStyle;
+  navbar: ViewStyle;
+  navbarContent: ViewStyle;
+  navButton: ViewStyle;
+  navButtonActive: ViewStyle;
+  navIcon: ViewStyle;
+  navLabelText: TextStyle;
+  navLabelActiveText: TextStyle;
+  unauthorized: ViewStyle;
+  unauthorizedIcon: ViewStyle;
+  unauthorizedTitleText: TextStyle;
+  unauthorizedDescText: TextStyle;
+};
 
 const styles = StyleSheet.create<Styles>({
   container: {
@@ -233,15 +233,15 @@ const styles = StyleSheet.create<Styles>({
     backgroundColor: colors.background,
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.md,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
   headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   headerIcon: {
     marginRight: spacing.sm,
@@ -267,12 +267,12 @@ const styles = StyleSheet.create<Styles>({
     paddingVertical: spacing.sm,
   },
   navbarContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   navButton: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: spacing.sm,
     marginHorizontal: spacing.sm,
     borderRadius: spacing.xl,
@@ -294,8 +294,8 @@ const styles = StyleSheet.create<Styles>({
   },
   unauthorized: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     padding: spacing.xl,
   },
   unauthorizedIcon: {
@@ -310,6 +310,6 @@ const styles = StyleSheet.create<Styles>({
   },
   unauthorizedDescText: {
     color: colors.text.secondary,
-    textAlign: 'center',
+    textAlign: "center",
   },
-})
+});

@@ -59,12 +59,15 @@ importers:
       expo-image:
         specifier: ~2.3.0
         version: 2.3.0(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-web@0.20.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      expo-linear-gradient:
+        specifier: ^14.1.5
+        version: 14.1.5(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       expo-linking:
         specifier: ~7.1.5
         version: 7.1.5(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       expo-router:
         specifier: ~3.5.24
-        version: 3.5.24(fllw2aialbcha4p7mkylaakm3i)
+        version: 3.5.24(acfc3deecbedd56bcdaa319b38b713e9)
       expo-splash-screen:
         specifier: ~0.30.9
         version: 0.30.9(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))
@@ -80,6 +83,9 @@ importers:
       expo-web-browser:
         specifier: ~14.2.0
         version: 14.2.0(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))
+      lucide-react:
+        specifier: ^0.522.0
+        version: 0.522.0(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -92,6 +98,9 @@ importers:
       react-native-gesture-handler:
         specifier: ~2.24.0
         version: 2.24.0(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      react-native-linear-gradient:
+        specifier: ^2.8.3
+        version: 2.8.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       react-native-reanimated:
         specifier: ~3.17.4
         version: 3.17.5(@babel/core@7.27.4)(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
@@ -2584,6 +2593,13 @@ packages:
       expo: '*'
       react: '*'
 
+  expo-linear-gradient@14.1.5:
+    resolution: {integrity: sha512-BSN3MkSGLZoHMduEnAgfhoj3xqcDWaoICgIr4cIYEx1GcHfKMhzA/O4mpZJ/WC27BP1rnAqoKfbclk1eA70ndQ==}
+    peerDependencies:
+      expo: '*'
+      react: '*'
+      react-native: '*'
+
   expo-linking@7.1.5:
     resolution: {integrity: sha512-8g20zOpROW78bF+bLI4a3ZWj4ntLgM0rCewKycPL0jk9WGvBrBtFtwwADJgOiV1EurNp3lcquerXGlWS+SOQyA==}
     peerDependencies:
@@ -3377,6 +3393,11 @@ packages:
     resolution: {integrity: sha512-P1FlFBGCMPMXu+EGdVD9W4Mjm0DqsusmKgO7Xc33mI5X1bklmsQb0hfzPhXomQr9waWIBDsiOjvr1e6BTaUqpA==}
     deprecated: This package has been deprecated. Please see https://lucia-auth.com/lucia-v3/migrate.
 
+  lucide-react@0.522.0:
+    resolution: {integrity: sha512-jnJbw974yZ7rQHHEFKJOlWAefG3ATSCZHANZxIdx8Rk/16siuwjgA4fBULpXEAWx/RlTs3FzmKW/udWUuO0aRw==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   makeerror@1.0.12:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
 
@@ -3883,6 +3904,12 @@ packages:
 
   react-native-is-edge-to-edge@1.1.7:
     resolution: {integrity: sha512-EH6i7E8epJGIcu7KpfXYXiV2JFIYITtq+rVS8uEb+92naMRBdxhTuS8Wn2Q7j9sqyO0B+Xbaaf9VdipIAmGW4w==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+
+  react-native-linear-gradient@2.8.3:
+    resolution: {integrity: sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -7487,7 +7514,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0)(eslint@9.29.0(jiti@1.21.7)))(eslint@9.29.0(jiti@1.21.7)):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.29.0(jiti@1.21.7)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -7518,7 +7545,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.29.0(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0)(eslint@9.29.0(jiti@1.21.7)))(eslint@9.29.0(jiti@1.21.7))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.29.0(jiti@1.21.7))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -7724,6 +7751,12 @@ snapshots:
       expo: 53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       react: 19.0.0
 
+  expo-linear-gradient@14.1.5(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      expo: 53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      react: 19.0.0
+      react-native: 0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)
+
   expo-linking@7.1.5(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
     dependencies:
       expo-constants: 17.1.6(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))
@@ -7756,7 +7789,7 @@ snapshots:
     dependencies:
       invariant: 2.2.4
 
-  expo-router@3.5.24(fllw2aialbcha4p7mkylaakm3i):
+  expo-router@3.5.24(acfc3deecbedd56bcdaa319b38b713e9):
     dependencies:
       '@expo/metro-runtime': 3.2.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))
       '@expo/server': 0.4.4(typescript@5.8.3)
@@ -8587,6 +8620,10 @@ snapshots:
       '@oslojs/crypto': 1.0.1
       '@oslojs/encoding': 1.1.0
 
+  lucide-react@0.522.0(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+
   makeerror@1.0.12:
     dependencies:
       tmpl: 1.0.5
@@ -9167,6 +9204,11 @@ snapshots:
       shallowequal: 1.1.0
 
   react-native-is-edge-to-edge@1.1.7(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-native: 0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)
+
+  react-native-linear-gradient@2.8.3(react-native@0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
     dependencies:
       react: 19.0.0
       react-native: 0.79.4(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)
